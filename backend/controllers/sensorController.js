@@ -44,7 +44,7 @@ exports.recordData = async (req, res) => {
     const currentTime = Date.now();
 
     // 1. PRIORITY: Check for Critical Temperature (> 35°C)
-    if (temp > 35 && (currentTime - lastTempEmailTime > TEMP_COOLDOWN)) {
+    if (temp > 30 && (currentTime - lastTempEmailTime > TEMP_COOLDOWN)) {
       await sendAlertEmail(req.body, "🔥 CRITICAL HEAT DETECTED");
       lastTempEmailTime = currentTime;
     } 
