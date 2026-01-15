@@ -2,7 +2,10 @@
   "name": "smart-home-monitoring",
   "version": "1.0.0",
   "scripts": {
-    "build": "npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend",
-    "start": "node backend/server.js"
+    "install-backend": "cd backend && npm install",
+    "install-frontend": "cd frontend && npm install",
+    "build-frontend": "cd frontend && npm run build",
+    "render-postbuild": "npm run install-backend && npm run install-frontend && npm run build-frontend",
+    "start": "cd backend && node server.js"
   }
 }
