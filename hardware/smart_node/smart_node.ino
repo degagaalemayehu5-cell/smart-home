@@ -12,8 +12,8 @@
 
 DHT dht(DHTPIN, DHTTYPE);
 
-const char* ssid = "Galaxy M16 5G 5212";
-const char* password = "dagi2468024";
+const char* ssid = "Dunder Mifflin";
+const char* password = "tw345678";
 
 // UPDATED: Your new Render Cloud URL
 const char* serverName = "https://smart-home-1-zrth.onrender.com/api/sensors";
