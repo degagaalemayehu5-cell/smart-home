@@ -1,11 +1,11 @@
 {
   "name": "smart-home-monitoring",
   "version": "1.0.0",
-  "scripts": {
-    "install-backend": "cd backend && npm install",
-    "install-frontend": "cd frontend && npm install",
-    "build-frontend": "cd frontend && npm run build",
-    "render-postbuild": "npm run install-backend && npm run install-frontend && npm run build-frontend",
-    "start": "cd backend && node server.js"
-  }
+ "scripts": {
+  "install-backend": "cd backend && npm install",
+  "install-frontend": "cd frontend && npm install",
+  "build-frontend": "cd frontend && ./node_modules/.bin/vite build",
+  "render-postbuild": "npm run install-backend && npm run install-frontend && npm run build-frontend",
+  "start": "cd backend && node server.js"
+}
 }
