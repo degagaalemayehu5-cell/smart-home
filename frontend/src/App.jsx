@@ -5,12 +5,10 @@ import {
 } from 'recharts';
 
 // --- HELPER COMPONENT: TREND CARD ---
-// Now uses real comparison logic from the backend data
 const StatComparison = ({ label, today, yesterday, unit }) => {
   const diff = today - yesterday;
   const isIncrease = diff > 0;
   
-  // Guard against undefined values during initial load
   const valToday = today || 0;
   const valYesterday = yesterday || 0;
 
@@ -53,18 +51,19 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [showAll, setShowAll] = useState(false);
 
-  // CONFIG: Your Galaxy M16 Hotspot IP
-  const LOCAL_IP = "10.209.29.2"; 
+  // CONFIG: Your Live Render Production URL
+  const API_BASE_URL = "https://smart-home-1-zrth.onrender.com"; 
 
   const fetchAllData = async () => {
     try {
-      // 1. Fetch Live Data (Last 50 records)
-      const resLive = await fetch(`http://${LOCAL_IP}:5000/api/sensors`);
+      // 1. Fetch Live Data
+      const resLive = await fetch(`${API_BASE_URL}/api/sensors`);
+      if (!resLive.ok) throw new Error('Network response was not ok');
       const liveData = await resLive.json();
       setData(liveData);
       
-      // 2. Fetch Comparison Analytics (Today vs Yesterday)
-      const resAnalytics = await fetch(`http://${LOCAL_IP}:5000/api/sensors/analytics`);
+      // 2. Fetch Comparison Analytics
+      const resAnalytics = await fetch(`${API_BASE_URL}/api/sensors/analytics`);
       const analyticsData = await resAnalytics.json();
       setAnalytics(analyticsData);
 
@@ -97,7 +96,7 @@ const App = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center mb-8">
         <div>
           <h1 className="text-5xl font-black tracking-tighter italic">IoT.CORE</h1>
-          <p className="opacity-40 font-bold text-xs uppercase tracking-widest mt-1">Galaxy M16 Network Active</p>
+          <p className="opacity-40 font-bold text-xs uppercase tracking-widest mt-1">Cloud Network Active</p>
         </div>
         <div className="flex items-center gap-4">
           <button 
@@ -112,7 +111,7 @@ const App = () => {
         </div>
       </div>
 
-      {/* ANALYTICS SUMMARY BAR (REAL COMPARISON) */}
+      {/* ANALYTICS SUMMARY BAR */}
       {analytics && (
         <div className={`${theme.card} max-w-7xl mx-auto rounded-[2.5rem] mb-8 border shadow-xl flex justify-around items-center p-2`}>
           <StatComparison 
